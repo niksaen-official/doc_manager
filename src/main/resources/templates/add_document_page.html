@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add document</title>
+</head>
+<body>
+    <h1>Add document</h1>
+    <form action="/add_document" method="post">
+        <p>Document name:<input type="text" th:name="name"/></p>
+        <p>Document type:<input type="text" th:name="type"/></p>
+        <input type="submit" value="Add"/>
+    </form>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit document</title>
+</head>
+<body th:inline="text">
+    <h1>Edit document</h1>
+    <h2>Document ID: [[${id}]]</h2>
+    <h2>Name: [[${name}]]</h2>
+    <h2>Created date: [[${createDate}]]</h2>
+    <h2>Type: [[${type}]]</h2>
+    <form action="/edit_document" method="post">
+        <p>New document name:<input type="text" th:name="name"/></p>
+        <p>New document type:<input type="text" th:name="type"/></p>
+        <input type="number" th:name="id" hidden="hidden" th:value="${id}"/>
+        <input type="submit" value="Edit"/>
+    </form>
+    <form action="/delete_document" method="post" style="margin-top: 16px">
+        <input type="number" th:name="id" hidden="hidden" th:value="${id}"/>
+        <input type="submit" value="delete"/>
+    </form>
+</body>
+</html>

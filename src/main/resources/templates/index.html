@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+</head>
+<body>
+    <h1>Main page</h1>
+    <form action="filter_by_value">
+        <input type="search" th:name="value"/>
+        <input type="submit" value="Filter"/>
+    </form>
+    <form action="add_document_page" style="margin-top: 16px;">
+        <input type="submit" value="Add new document"/>
+    </form>
+    <table style="margin-top: 16px;">
+        <thead>
+            <tr>
+                <th>ID:</th>
+                <th>Name:</th>
+                <th>Create date:</th>
+                <th>Type:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="document:${documents}">
+                <th th:text="${document.id}"></th>
+                <th th:text="${document.name}"></th>
+                <th th:text="${document.createDate}"></th>
+                <th th:text="${document.type}"></th>
+                <th>
+                    <form action="/edit_document_page">
+                        <input type="number" th:name="id" hidden="hidden" th:value="${document.id}"/>
+                        <input type="submit" value="Edit"/>
+                    </form>
+                </th>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
