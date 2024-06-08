@@ -2,18 +2,12 @@ package com.niksaen.doc_manager.controllers;
 
 import com.niksaen.doc_manager.models.Document;
 import com.niksaen.doc_manager.services.DocumentService;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.IOException;
-import java.sql.Time;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.Objects;
 
 @Controller
@@ -59,7 +53,7 @@ public class DocManagerController {
 
     @GetMapping("/edit_document_page")
     public String getEditDocumentPage(@RequestParam(value = "id") int id,Model model){
-        Document document = documentService.getDocumentById(id);
+        Document document = documentService.get(id);
         model.addAttribute("id",id);
         model.addAttribute("name",document.name);
         model.addAttribute("createDate",document.createDate);
@@ -69,16 +63,16 @@ public class DocManagerController {
 
     @PostMapping(value = "/edit_document")
     public String editDocument(@RequestParam(value = "id") int id,@RequestParam(value = "name") String name,@RequestParam(value = "type") String type,Model model){
-        Document document = documentService.getDocumentById(id);
+        Document document = documentService.get(id);
         if(!name.isEmpty()) document.name = name;
         if(!type.isEmpty()) document.type = type;
-        documentService.editDocument(document);
+        documentService.update(document);
         return "redirect:/";
     }
 
     @PostMapping(value = "/delete_document")
     public String deleteDocument(@RequestParam(value = "id") int id, Model model){
-        documentService.deleteDocument(id);
+        documentService.delete(documentService.get(id));
         return "redirect:/";
     }
 }
